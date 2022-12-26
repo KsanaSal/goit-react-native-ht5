@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ImageBackground, Text } from "react-native";
+import { StyleSheet, View, ImageBackground } from "react-native";
 import RegistrationScreen from "./Screens/RegistrationScreen";
 
 export default function App() {
@@ -9,7 +9,6 @@ export default function App() {
                 source={require("./assets/images/photo-background-1x.jpg")}
                 style={styles.image}
             >
-                <Text style={styles.text}>ghfgrufg</Text>
                 <RegistrationScreen />
             </ImageBackground>
             <StatusBar style="auto" />
@@ -24,11 +23,11 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         resizeMode: "cover",
-        justifyContent: "center",
+        justifyContent: "flex-end",
     },
-    text: {
-        color: "red",
-        textAlign: "center",
-        fontSize: 20,
-    },
+    // text: {
+    //     color: "red",
+    //     textAlign: "center",
+    //     fontSize: 20,
+    // },
 });
