@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
     StyleSheet,
     View,
@@ -6,67 +7,146 @@ import {
     TouchableOpacity,
     Pressable,
     Image,
+    KeyboardAvoidingView,
+    Platform,
+    TouchableWithoutFeedback,
+    Keyboard,
 } from "react-native";
 
-export default function RegistrationScreen() {
-    return (
-        <View style={styles.container}>
-            <View style={styles.wrap}>
-                <View style={styles.wrapPhoto}></View>
-                <View style={styles.wrapIcon}>
-                    <Image
-                        source={require("../assets/icon/icon-plus.png")}
-                    ></Image>
-                </View>
-            </View>
+const initialState = {
+    login: "",
+    email: "",
+    password: "",
+};
 
-            <View>
-                <Text style={styles.text}>Регістрація</Text>
-                <View style={styles.form}>
+export default function RegistrationScreen() {
+    const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+    const [state, setState] = useState(initialState);
+    const [visibilityPassword, setVisibilityPassword] = useState(true);
+
+    const keyboardHide = () => {
+        setIsShowKeyboard(false);
+        Keyboard.dismiss();
+        console.log(state);
+        setState(initialState);
+    };
+
+    return (
+        <TouchableWithoutFeedback onPress={keyboardHide}>
+            <View
+                style={{
+                    ...styles.container,
+                    flex: isShowKeyboard ? 0.8 : 0.63,
+                }}
+            >
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                >
+                    <View style={styles.wrap}>
+                        <View style={styles.wrapPhoto}></View>
+                        <View style={styles.wrapIcon}>
+                            <Image
+                                source={require("../assets/icon/icon-plus.png")}
+                            ></Image>
+                        </View>
+                    </View>
+
                     <View>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Логін"
-                            placeholderTextColor="#BDBDBD"
-                        />
+                        <Text style={styles.text}>Регістрація</Text>
+
+                        <View style={styles.form}>
+                            <View>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Логін"
+                                    placeholderTextColor="#BDBDBD"
+                                    onFocus={() => setIsShowKeyboard(true)}
+                                    value={state.login}
+                                    onChangeText={(value) =>
+                                        setState((prevState) => ({
+                                            ...prevState,
+                                            login: value,
+                                        }))
+                                    }
+                                />
+                            </View>
+                            <View style={{ marginTop: 16 }}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Адреса електронної почти"
+                                    placeholderTextColor="#BDBDBD"
+                                    onFocus={() => setIsShowKeyboard(true)}
+                                    value={state.email}
+                                    onChangeText={(value) =>
+                                        setState((prevState) => ({
+                                            ...prevState,
+                                            email: value,
+                                        }))
+                                    }
+                                />
+                            </View>
+                            <View style={styles.inputPassword} floatingLabel>
+                                <TextInput
+                                    style={styles.input}
+                                    secureTextEntry={visibilityPassword}
+                                    placeholder="Пароль"
+                                    placeholderTextColor="#BDBDBD"
+                                    onFocus={() => setIsShowKeyboard(true)}
+                                    value={state.password}
+                                    onChangeText={(value) =>
+                                        setState((prevState) => ({
+                                            ...prevState,
+                                            password: value,
+                                        }))
+                                    }
+                                />
+                                <Text
+                                    style={styles.textBtn}
+                                    onPress={() =>
+                                        setVisibilityPassword(
+                                            !visibilityPassword
+                                        )
+                                    }
+                                >
+                                    {visibilityPassword
+                                        ? "Показати"
+                                        : "Приховати"}
+                                </Text>
+                            </View>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                style={styles.btn}
+                                onPress={keyboardHide}
+                            >
+                                <Text style={styles.btnTitle}>
+                                    Зареєструватися
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <Pressable style={{ alignItems: "center" }}>
+                            <Text style={styles.linkText}>
+                                Вже є акаунт? Увійти
+                            </Text>
+                        </Pressable>
                     </View>
-                    <View style={{ marginTop: 16 }}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Адреса електронної почти"
-                            placeholderTextColor="#BDBDBD"
-                        />
-                    </View>
-                    <View style={styles.inputPassword} floatingLabel>
-                        <TextInput
-                            style={styles.input}
-                            secureTextEntry={false}
-                            placeholder="Пароль"
-                            placeholderTextColor="#BDBDBD"
-                        />
-                        <Text style={styles.textBtn}>Показати</Text>
-                    </View>
-                    <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
-                        <Text style={styles.btnTitle}>Зареєструватися</Text>
-                    </TouchableOpacity>
-                </View>
-                <Pressable style={{ alignItems: "center" }}>
-                    <Text style={styles.linkText}>Вже є акаунт? Увійти</Text>
-                </Pressable>
+                </KeyboardAvoidingView>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.63,
+        bottom: 0,
+        // flex: 0.63,
         margin: 0,
         // opacity: 1,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: "#ffffff",
         paddingHorizontal: 16,
+        // paddingBottom: 100,
         // alignContent: "center",
         // justifyContent: "center",
     },

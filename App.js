@@ -33,9 +33,4 @@ const styles = StyleSheet.create({
         // resizeMode: "cover",
         justifyContent: "flex-end",
     },
-    // text: {
-    //     color: "red",
-    //     textAlign: "center",
-    //     fontSize: 20,
-    // },
 });
