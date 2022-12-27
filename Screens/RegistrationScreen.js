@@ -5,6 +5,7 @@ import {
     TextInput,
     TouchableOpacity,
     Pressable,
+    Image,
 } from "react-native";
 
 export default function RegistrationScreen() {
@@ -12,7 +13,11 @@ export default function RegistrationScreen() {
         <View style={styles.container}>
             <View style={styles.wrap}>
                 <View style={styles.wrapPhoto}></View>
-                <View style={styles.icon}></View>
+                <View style={styles.wrapIcon}>
+                    <Image
+                        source={require("../assets/icon/icon-plus.png")}
+                    ></Image>
+                </View>
             </View>
 
             <View>
@@ -32,13 +37,14 @@ export default function RegistrationScreen() {
                             placeholderTextColor="#BDBDBD"
                         />
                     </View>
-                    <View style={{ marginTop: 16 }}>
+                    <View style={styles.inputPassword} floatingLabel>
                         <TextInput
                             style={styles.input}
-                            secureTextEntry={true}
+                            secureTextEntry={false}
                             placeholder="Пароль"
                             placeholderTextColor="#BDBDBD"
                         />
+                        <Text style={styles.textBtn}>Показати</Text>
                     </View>
                     <TouchableOpacity activeOpacity={0.8} style={styles.btn}>
                         <Text style={styles.btnTitle}>Зареєструватися</Text>
@@ -54,7 +60,7 @@ export default function RegistrationScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.7,
+        flex: 0.63,
         margin: 0,
         // opacity: 1,
         borderTopLeftRadius: 25,
@@ -78,10 +84,14 @@ const styles = StyleSheet.create({
         borderRadius: 16,
     },
 
-    icon: {
+    wrapIcon: {
         position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
         bottom: -20,
-        left: 235,
+        left: 233,
         color: "#FF6C00",
         backgroundColor: "#fff",
         borderWidth: 1,
@@ -102,11 +112,21 @@ const styles = StyleSheet.create({
         color: "#212121",
     },
 
+    textBtn: {
+        position: "absolute",
+        right: 16,
+        top: 12,
+        fontSize: 16,
+        color: "#1B4371",
+    },
+
     form: {
         marginBottom: 16,
         // marginHorizontal: 16,
         // zIndex: 1,
     },
+
+    inputPassword: { marginTop: 16 },
 
     input: {
         padding: 16,

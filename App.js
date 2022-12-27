@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ImageBackground } from "react-native";
+import { StyleSheet, View, ImageBackground, Dimensions } from "react-native";
 import RegistrationScreen from "./Screens/RegistrationScreen";
 
 export default function App() {
@@ -21,8 +21,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     image: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: -1,
         flex: 1,
-        resizeMode: "cover",
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+        // resizeMode: "cover",
         justifyContent: "flex-end",
     },
     // text: {
