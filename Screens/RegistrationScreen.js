@@ -37,6 +37,7 @@ export default function RegistrationScreen() {
                 style={{
                     ...styles.container,
                     flex: isShowKeyboard ? 0.8 : 0.63,
+                    // width: dimensions,
                 }}
             >
                 <KeyboardAvoidingView
