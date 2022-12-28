@@ -140,9 +140,7 @@ export default function RegistrationScreen() {
 const styles = StyleSheet.create({
     container: {
         bottom: 0,
-        // flex: 0.63,
         margin: 0,
-        // opacity: 1,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: "#ffffff",
@@ -155,7 +153,6 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 128,
         top: -60,
-        // alignItems: "center",
         width: 120,
         height: 120,
         backgroundColor: "#F6F6F6",
@@ -202,8 +199,6 @@ const styles = StyleSheet.create({
 
     form: {
         marginBottom: 16,
-        // marginHorizontal: 16,
-        // zIndex: 1,
     },
 
     inputPassword: { marginTop: 16 },
@@ -229,7 +224,6 @@ const styles = StyleSheet.create({
         marginTop: 40,
         justifyContent: "center",
         alignItems: "center",
-        // marginHorizontal: 20,
     },
 
     btnTitle: {

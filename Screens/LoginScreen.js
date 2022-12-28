@@ -6,7 +6,6 @@ import {
     TextInput,
     TouchableOpacity,
     Pressable,
-    Image,
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
@@ -36,7 +35,6 @@ export default function LoginScreen() {
                 style={{
                     ...styles.container,
                     flex: isShowKeyboard ? 0.68 : 0.63,
-                    // width: dimensions,
                 }}
             >
                 <KeyboardAvoidingView
@@ -113,9 +111,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     container: {
         bottom: 0,
-        // flex: 0.63,
         margin: 0,
-        // opacity: 1,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: "#ffffff",
@@ -145,8 +141,6 @@ const styles = StyleSheet.create({
 
     form: {
         marginBottom: 16,
-        // marginHorizontal: 16,
-        // zIndex: 1,
     },
 
     inputPassword: { marginTop: 16 },
@@ -172,7 +166,6 @@ const styles = StyleSheet.create({
         marginTop: 40,
         justifyContent: "center",
         alignItems: "center",
-        // marginHorizontal: 20,
     },
 
     btnTitle: {
