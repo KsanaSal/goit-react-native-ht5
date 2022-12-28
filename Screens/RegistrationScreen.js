@@ -23,12 +23,45 @@ export default function RegistrationScreen() {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [visibilityPassword, setVisibilityPassword] = useState(true);
+    const [focusedEmail, setFocusedEmail] = useState(false);
+    const [focusedPassw, setFocusedPassw] = useState(false);
+    const [focusedLogin, setFocusedLogin] = useState(false);
 
     const keyboardHide = () => {
         setIsShowKeyboard(false);
         Keyboard.dismiss();
         console.log(state);
         setState(initialState);
+        setFocusedEmail(false);
+        setFocusedPassw(false);
+        setFocusedLogin(false);
+    };
+
+    const onFocusLogin = () => {
+        setIsShowKeyboard(true);
+        setFocusedLogin(true);
+    };
+
+    const onBlurLogin = () => {
+        setFocusedLogin(false);
+    };
+
+    const onFocusEmail = () => {
+        setIsShowKeyboard(true);
+        setFocusedEmail(true);
+    };
+
+    const onBlurEmail = () => {
+        setFocusedEmail(false);
+    };
+
+    const onFocusPassw = () => {
+        setIsShowKeyboard(true);
+        setFocusedPassw(true);
+    };
+
+    const onBlurPassw = () => {
+        setFocusedPassw(false);
     };
 
     return (
@@ -58,10 +91,17 @@ export default function RegistrationScreen() {
                         <View style={styles.form}>
                             <View>
                                 <TextInput
-                                    style={styles.input}
+                                    style={[
+                                        styles.input,
+                                        focusedLogin && {
+                                            borderColor: "#FF6C00",
+                                            backgroundColor: "#fff",
+                                        },
+                                    ]}
                                     placeholder="Логін"
                                     placeholderTextColor="#BDBDBD"
-                                    onFocus={() => setIsShowKeyboard(true)}
+                                    onFocus={() => onFocusLogin()}
+                                    onBlur={() => onBlurLogin()}
                                     value={state.login}
                                     onChangeText={(value) =>
                                         setState((prevState) => ({
@@ -73,10 +113,17 @@ export default function RegistrationScreen() {
                             </View>
                             <View style={{ marginTop: 16 }}>
                                 <TextInput
-                                    style={styles.input}
+                                    style={[
+                                        styles.input,
+                                        focusedEmail && {
+                                            borderColor: "#FF6C00",
+                                            backgroundColor: "#fff",
+                                        },
+                                    ]}
                                     placeholder="Адреса електронної почти"
                                     placeholderTextColor="#BDBDBD"
-                                    onFocus={() => setIsShowKeyboard(true)}
+                                    onFocus={() => onFocusEmail()}
+                                    onBlur={() => onBlurEmail()}
                                     value={state.email}
                                     onChangeText={(value) =>
                                         setState((prevState) => ({
@@ -88,11 +135,18 @@ export default function RegistrationScreen() {
                             </View>
                             <View style={styles.inputPassword} floatingLabel>
                                 <TextInput
-                                    style={styles.input}
+                                    style={[
+                                        styles.input,
+                                        focusedPassw && {
+                                            borderColor: "#FF6C00",
+                                            backgroundColor: "#fff",
+                                        },
+                                    ]}
                                     secureTextEntry={visibilityPassword}
                                     placeholder="Пароль"
                                     placeholderTextColor="#BDBDBD"
-                                    onFocus={() => setIsShowKeyboard(true)}
+                                    onFocus={() => onFocusPassw()}
+                                    onBlur={() => onBlurPassw()}
                                     value={state.password}
                                     onChangeText={(value) =>
                                         setState((prevState) => ({

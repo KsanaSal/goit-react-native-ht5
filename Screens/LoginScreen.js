@@ -21,12 +21,34 @@ export default function LoginScreen() {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [visibilityPassword, setVisibilityPassword] = useState(true);
+    const [focusedEmail, setFocusedEmail] = useState(false);
+    const [focusedPassw, setFocusedPassw] = useState(false);
 
     const keyboardHide = () => {
         setIsShowKeyboard(false);
         Keyboard.dismiss();
         console.log(state);
         setState(initialState);
+        setFocusedEmail(false);
+        setFocusedPassw(false);
+    };
+
+    const onFocusEmail = () => {
+        setIsShowKeyboard(true);
+        setFocusedEmail(true);
+    };
+
+    const onBlurEmail = () => {
+        setFocusedEmail(false);
+    };
+
+    const onFocusPassw = () => {
+        setIsShowKeyboard(true);
+        setFocusedPassw(true);
+    };
+
+    const onBlurPassw = () => {
+        setFocusedPassw(false);
     };
 
     return (
@@ -34,7 +56,7 @@ export default function LoginScreen() {
             <View
                 style={{
                     ...styles.container,
-                    flex: isShowKeyboard ? 0.68 : 0.63,
+                    flex: isShowKeyboard ? 0.68 : 0.61,
                 }}
             >
                 <KeyboardAvoidingView
@@ -46,10 +68,17 @@ export default function LoginScreen() {
                         <View style={styles.form}>
                             <View style={{ marginTop: 16 }}>
                                 <TextInput
-                                    style={styles.input}
+                                    style={[
+                                        styles.input,
+                                        focusedEmail && {
+                                            borderColor: "#FF6C00",
+                                            backgroundColor: "#fff",
+                                        },
+                                    ]}
                                     placeholder="Адреса електронної почти"
                                     placeholderTextColor="#BDBDBD"
-                                    onFocus={() => setIsShowKeyboard(true)}
+                                    onFocus={() => onFocusEmail()}
+                                    onBlur={() => onBlurEmail()}
                                     value={state.email}
                                     onChangeText={(value) =>
                                         setState((prevState) => ({
@@ -61,11 +90,18 @@ export default function LoginScreen() {
                             </View>
                             <View style={styles.inputPassword} floatingLabel>
                                 <TextInput
-                                    style={styles.input}
+                                    style={[
+                                        styles.input,
+                                        focusedPassw && {
+                                            borderColor: "#FF6C00",
+                                            backgroundColor: "#fff",
+                                        },
+                                    ]}
                                     secureTextEntry={visibilityPassword}
                                     placeholder="Пароль"
                                     placeholderTextColor="#BDBDBD"
-                                    onFocus={() => setIsShowKeyboard(true)}
+                                    onFocus={() => onFocusPassw()}
+                                    onBlur={() => onBlurPassw()}
                                     value={state.password}
                                     onChangeText={(value) =>
                                         setState((prevState) => ({

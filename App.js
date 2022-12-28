@@ -70,8 +70,8 @@ export default function App() {
                 source={require("./assets/images/photo-background-1x.jpg")}
                 style={styles.image}
             >
-                {/* <RegistrationScreen /> */}
-                <LoginScreen />
+                <RegistrationScreen />
+                {/* <LoginScreen /> */}
             </ImageBackground>
             <StatusBar style="auto" />
         </View>
