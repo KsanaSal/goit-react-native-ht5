@@ -146,9 +146,6 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 25,
         backgroundColor: "#ffffff",
         paddingHorizontal: 16,
-        // paddingBottom: 100,
-        // alignContent: "center",
-        // justifyContent: "center",
     },
 
     wrap: { marginBottom: 32 },
@@ -185,6 +182,7 @@ const styles = StyleSheet.create({
         marginTop: 32,
         marginBottom: 32,
         fontSize: 30,
+        fontFamily: "Roboto-Medium",
         fontWeight: "medium",
         lineHeight: 35,
         letterSpacing: 0.01,
@@ -196,6 +194,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         right: 16,
         top: 12,
+        fontFamily: "Roboto-Regular",
         fontSize: 16,
         color: "#1B4371",
     },
@@ -215,9 +214,9 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 8,
         backgroundColor: "#F6F6F6",
-        // placeholderTextColor: "red",
 
         textAlign: "left",
+        fontFamily: "Roboto-Regular",
         fontSize: 16,
         color: "#212121",
     },
@@ -235,9 +234,11 @@ const styles = StyleSheet.create({
     btnTitle: {
         color: "#fff",
         fontSize: 16,
+        fontFamily: "Roboto-Regular",
     },
 
     linkText: {
+        fontFamily: "Roboto-Regular",
         fontSize: 16,
         color: "#1B4371",
         alignItems: "center",
