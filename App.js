@@ -2,9 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ImageBackground, Dimensions } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import RegistrationScreen from "./Screens/RegistrationScreen";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback } from "react";
 import LoginScreen from "./Screens/LoginScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -12,21 +16,6 @@ export default function App() {
         "Roboto-Italic": require("./assets/fonts/Roboto-Italic.ttf"),
         "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
     });
-    // const [dimensionsWidth, setDimensionsWidth] = useState(
-    //     Dimensions.get("window").width
-    // );
-    // console.log(dimensionsWidth);
-    // useEffect(() => {
-    //     const onChange = () => {
-    //         const width = Dimensions.get("window").width;
-
-    //         setDimensionsWidth(width);
-    //     };
-    //     Dimensions.addEventListener("change", onChange);
-    //     return () => {
-    //         Dimensions.removeEventListener("change", onChange);
-    //     };
-    // }, []);
 
     useEffect(() => {
         async function prepare() {
@@ -45,35 +34,36 @@ export default function App() {
         return null;
     }
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-        },
-        image: {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: -1,
-            flex: 1,
-            width: Dimensions.get("window").width,
-            height: Dimensions.get("window").height,
-            // resizeMode: "cover",
-            justifyContent: "flex-end",
-        },
-    });
-
     return (
         <View style={styles.container} onLayout={onLayout}>
-            <ImageBackground
+            {/* <ImageBackground
                 source={require("./assets/images/photo-background-1x.jpg")}
                 style={styles.image}
-            >
-                <RegistrationScreen />
-                {/* <LoginScreen /> */}
-            </ImageBackground>
+            > */}
+            <NavigationContainer>
+                <Stack.Navigator>
+                    {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+                    {/* <Stack.Screen
+                        name="Register"
+                        component={RegistrationScreen}
+                    /> */}
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+            {/* <RegistrationScreen /> */}
+            {/* <LoginScreen /> */}
+            {/* </ImageBackground> */}
             <StatusBar style="auto" />
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        // alignContent: "center",
+        // justifyContent: "center",
+        // alignItems: "center",
+        // textAlign: "center",
+    },
+});

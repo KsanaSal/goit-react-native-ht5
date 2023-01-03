@@ -11,6 +11,8 @@ import {
     Platform,
     TouchableWithoutFeedback,
     Keyboard,
+    ImageBackground,
+    Dimensions,
 } from "react-native";
 
 const initialState = {
@@ -66,139 +68,161 @@ export default function RegistrationScreen() {
 
     return (
         <TouchableWithoutFeedback onPress={keyboardHide}>
-            <View
-                style={{
-                    ...styles.container,
-                    flex: isShowKeyboard ? 0.8 : 0.63,
-                    // width: dimensions,
-                }}
+            <ImageBackground
+                source={require("../assets/images/photo-background-1x.jpg")}
+                style={styles.image}
             >
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                <View
+                    style={{
+                        ...styles.containerRegister,
+                        flex: isShowKeyboard ? 0.9 : 0.7,
+                        // width: dimensions,
+                    }}
                 >
-                    <View style={styles.wrap}>
-                        <View style={styles.wrapPhoto}></View>
-                        <View style={styles.wrapIcon}>
-                            <Image
-                                source={require("../assets/icon/icon-plus.png")}
-                            ></Image>
+                    <KeyboardAvoidingView
+                        behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    >
+                        <View style={styles.wrap}>
+                            <View style={styles.wrapPhoto}></View>
+                            <View style={styles.wrapIcon}>
+                                <Image
+                                    source={require("../assets/icon/icon-plus.png")}
+                                ></Image>
+                            </View>
                         </View>
-                    </View>
 
-                    <View>
-                        <Text style={styles.text}>Регістрація</Text>
+                        <View>
+                            <Text style={styles.text}>Регістрація</Text>
 
-                        <View style={styles.form}>
-                            <View>
-                                <TextInput
-                                    style={[
-                                        styles.input,
-                                        focusedLogin && {
-                                            borderColor: "#FF6C00",
-                                            backgroundColor: "#fff",
-                                        },
-                                    ]}
-                                    placeholder="Логін"
-                                    placeholderTextColor="#BDBDBD"
-                                    onFocus={() => onFocusLogin()}
-                                    onBlur={() => onBlurLogin()}
-                                    value={state.login}
-                                    onChangeText={(value) =>
-                                        setState((prevState) => ({
-                                            ...prevState,
-                                            login: value,
-                                        }))
-                                    }
-                                />
-                            </View>
-                            <View style={{ marginTop: 16 }}>
-                                <TextInput
-                                    style={[
-                                        styles.input,
-                                        focusedEmail && {
-                                            borderColor: "#FF6C00",
-                                            backgroundColor: "#fff",
-                                        },
-                                    ]}
-                                    placeholder="Адреса електронної почти"
-                                    placeholderTextColor="#BDBDBD"
-                                    onFocus={() => onFocusEmail()}
-                                    onBlur={() => onBlurEmail()}
-                                    value={state.email}
-                                    onChangeText={(value) =>
-                                        setState((prevState) => ({
-                                            ...prevState,
-                                            email: value,
-                                        }))
-                                    }
-                                />
-                            </View>
-                            <View style={styles.inputPassword} floatingLabel>
-                                <TextInput
-                                    style={[
-                                        styles.input,
-                                        focusedPassw && {
-                                            borderColor: "#FF6C00",
-                                            backgroundColor: "#fff",
-                                        },
-                                    ]}
-                                    secureTextEntry={visibilityPassword}
-                                    placeholder="Пароль"
-                                    placeholderTextColor="#BDBDBD"
-                                    onFocus={() => onFocusPassw()}
-                                    onBlur={() => onBlurPassw()}
-                                    value={state.password}
-                                    onChangeText={(value) =>
-                                        setState((prevState) => ({
-                                            ...prevState,
-                                            password: value,
-                                        }))
-                                    }
-                                />
-                                <Text
-                                    style={styles.textBtn}
-                                    onPress={() =>
-                                        setVisibilityPassword(
-                                            !visibilityPassword
-                                        )
-                                    }
+                            <View style={styles.form}>
+                                <View>
+                                    <TextInput
+                                        style={[
+                                            styles.input,
+                                            focusedLogin && {
+                                                borderColor: "#FF6C00",
+                                                backgroundColor: "#fff",
+                                            },
+                                        ]}
+                                        placeholder="Логін"
+                                        placeholderTextColor="#BDBDBD"
+                                        onFocus={() => onFocusLogin()}
+                                        onBlur={() => onBlurLogin()}
+                                        value={state.login}
+                                        onChangeText={(value) =>
+                                            setState((prevState) => ({
+                                                ...prevState,
+                                                login: value,
+                                            }))
+                                        }
+                                    />
+                                </View>
+                                <View style={{ marginTop: 16 }}>
+                                    <TextInput
+                                        style={[
+                                            styles.input,
+                                            focusedEmail && {
+                                                borderColor: "#FF6C00",
+                                                backgroundColor: "#fff",
+                                            },
+                                        ]}
+                                        placeholder="Адреса електронної почти"
+                                        placeholderTextColor="#BDBDBD"
+                                        onFocus={() => onFocusEmail()}
+                                        onBlur={() => onBlurEmail()}
+                                        value={state.email}
+                                        onChangeText={(value) =>
+                                            setState((prevState) => ({
+                                                ...prevState,
+                                                email: value,
+                                            }))
+                                        }
+                                    />
+                                </View>
+                                <View
+                                    style={styles.inputPassword}
+                                    floatingLabel
                                 >
-                                    {visibilityPassword
-                                        ? "Показати"
-                                        : "Приховати"}
-                                </Text>
+                                    <TextInput
+                                        style={[
+                                            styles.input,
+                                            focusedPassw && {
+                                                borderColor: "#FF6C00",
+                                                backgroundColor: "#fff",
+                                            },
+                                        ]}
+                                        secureTextEntry={visibilityPassword}
+                                        placeholder="Пароль"
+                                        placeholderTextColor="#BDBDBD"
+                                        onFocus={() => onFocusPassw()}
+                                        onBlur={() => onBlurPassw()}
+                                        value={state.password}
+                                        onChangeText={(value) =>
+                                            setState((prevState) => ({
+                                                ...prevState,
+                                                password: value,
+                                            }))
+                                        }
+                                    />
+                                    <Text
+                                        style={styles.textBtn}
+                                        onPress={() =>
+                                            setVisibilityPassword(
+                                                !visibilityPassword
+                                            )
+                                        }
+                                    >
+                                        {visibilityPassword
+                                            ? "Показати"
+                                            : "Приховати"}
+                                    </Text>
+                                </View>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={styles.btn}
+                                    onPress={keyboardHide}
+                                >
+                                    <Text style={styles.btnTitle}>
+                                        Зареєструватися
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
-                            <TouchableOpacity
-                                activeOpacity={0.8}
-                                style={styles.btn}
-                                onPress={keyboardHide}
-                            >
-                                <Text style={styles.btnTitle}>
-                                    Зареєструватися
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
 
-                        <Pressable style={{ alignItems: "center" }}>
-                            <Text style={styles.linkText}>
-                                Вже є акаунт? Увійти
-                            </Text>
-                        </Pressable>
-                    </View>
-                </KeyboardAvoidingView>
-            </View>
+                            <Pressable style={{ alignItems: "center" }}>
+                                <Text style={styles.linkText}>
+                                    Вже є акаунт? Увійти
+                                </Text>
+                            </Pressable>
+                        </View>
+                    </KeyboardAvoidingView>
+                </View>
+            </ImageBackground>
         </TouchableWithoutFeedback>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    containerRegister: {
         bottom: 0,
         margin: 0,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: "#ffffff",
         paddingHorizontal: 16,
+    },
+
+    image: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: -1,
+        flex: 1,
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+        // resizeMode: "cover",
+        justifyContent: "flex-end",
     },
 
     wrap: { marginBottom: 32 },
