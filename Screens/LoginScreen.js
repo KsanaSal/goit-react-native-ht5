@@ -19,7 +19,7 @@ const initialState = {
     password: "",
 };
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [visibilityPassword, setVisibilityPassword] = useState(true);
@@ -62,7 +62,7 @@ export default function LoginScreen() {
                 <View
                     style={{
                         ...styles.container,
-                        flex: isShowKeyboard ? 0.77 : 0.65,
+                        flex: isShowKeyboard ? 0.68 : 0.61,
                     }}
                 >
                     <KeyboardAvoidingView
@@ -140,12 +140,27 @@ export default function LoginScreen() {
                                     <Text style={styles.btnTitle}>Увійти</Text>
                                 </TouchableOpacity>
                             </View>
-
-                            <Pressable style={{ alignItems: "center" }}>
+                            <View
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "center",
+                                }}
+                            >
                                 <Text style={styles.linkText}>
-                                    Немає акаунта? Зареєструватися
+                                    Немає акаунта?
                                 </Text>
-                            </Pressable>
+                                <Pressable
+                                    style={styles.linkBtn}
+                                    onPress={() =>
+                                        navigation.navigate("Register")
+                                    }
+                                >
+                                    <Text style={styles.linkText}>
+                                        Зареєструватися
+                                    </Text>
+                                </Pressable>
+                            </View>
                         </View>
                     </KeyboardAvoidingView>
                 </View>
@@ -234,10 +249,18 @@ const styles = StyleSheet.create({
         fontFamily: "Roboto-Regular",
     },
 
+    linkBtn: {
+        alignItems: "center",
+        marginLeft: 4,
+        borderBottomWidth: 1,
+        borderColor: "#1B4371",
+    },
+
     linkText: {
         fontFamily: "Roboto-Regular",
         fontSize: 16,
         color: "#1B4371",
         alignItems: "center",
+        // textDecorationLine: "underline",
     },
 });

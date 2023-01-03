@@ -41,17 +41,15 @@ export default function App() {
                 style={styles.image}
             > */}
             <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
                     {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-                    {/* <Stack.Screen
+                    <Stack.Screen
                         name="Register"
                         component={RegistrationScreen}
-                    /> */}
+                    />
                     <Stack.Screen name="Login" component={LoginScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
-            {/* <RegistrationScreen /> */}
-            {/* <LoginScreen /> */}
             {/* </ImageBackground> */}
             <StatusBar style="auto" />
         </View>

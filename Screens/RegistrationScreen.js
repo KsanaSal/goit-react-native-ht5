@@ -21,7 +21,7 @@ const initialState = {
     password: "",
 };
 
-export default function RegistrationScreen() {
+export default function RegistrationScreen({ navigation }) {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [visibilityPassword, setVisibilityPassword] = useState(true);
@@ -75,7 +75,7 @@ export default function RegistrationScreen() {
                 <View
                     style={{
                         ...styles.containerRegister,
-                        flex: isShowKeyboard ? 0.9 : 0.7,
+                        flex: isShowKeyboard ? 0.8 : 0.62,
                         // width: dimensions,
                     }}
                 >
@@ -188,11 +188,23 @@ export default function RegistrationScreen() {
                                 </TouchableOpacity>
                             </View>
 
-                            <Pressable style={{ alignItems: "center" }}>
+                            <View
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "center",
+                                }}
+                            >
                                 <Text style={styles.linkText}>
-                                    Вже є акаунт? Увійти
+                                    Вже є акаунт?
                                 </Text>
-                            </Pressable>
+                                <Pressable
+                                    style={styles.linkBtn}
+                                    onPress={() => navigation.navigate("Login")}
+                                >
+                                    <Text style={styles.linkText}>Увійти</Text>
+                                </Pressable>
+                            </View>
                         </View>
                     </KeyboardAvoidingView>
                 </View>
@@ -308,6 +320,13 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 16,
         fontFamily: "Roboto-Regular",
+    },
+
+    linkBtn: {
+        alignItems: "center",
+        marginLeft: 4,
+        borderBottomWidth: 1,
+        borderColor: "#1B4371",
     },
 
     linkText: {
