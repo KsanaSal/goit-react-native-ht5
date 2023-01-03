@@ -86,7 +86,7 @@ export default function RegistrationScreen({ navigation }) {
                             <View style={styles.wrapPhoto}></View>
                             <View style={styles.wrapIcon}>
                                 <Image
-                                    source={require("../assets/icon/icon-plus.png")}
+                                    source={require("../../assets/icon/icon-plus.png")}
                                 ></Image>
                             </View>
                         </View>

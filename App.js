@@ -1,13 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ImageBackground, Dimensions } from "react-native";
+
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
+
 import { useEffect, useCallback } from "react";
+import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
 import LoginScreen from "./Screens/authScreens/LoginScreen";
+import PostsScreen from "./Screens/mainScreens/PostsScreen";
+import CreatePostsScreen from "./Screens/mainScreens/CreatePostsScreen";
+import ProfileScreen from "./Screens/mainScreens/ProfileScreen";
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -39,14 +45,21 @@ export default function App() {
     return (
         <View style={styles.container} onLayout={onLayout}>
             <NavigationContainer>
-                <AuthStack.Navigator screenOptions={{ headerShown: false }}>
-                    {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+                <MainTab.Navigator>
+                    <MainTab.Screen name="Posts" component={PostsScreen} />
+                    <MainTab.Screen
+                        name="Create"
+                        component={CreatePostsScreen}
+                    />
+                    <MainTab.Screen name="Profile" component={ProfileScreen} />
+                </MainTab.Navigator>
+                {/* <AuthStack.Navigator screenOptions={{ headerShown: false }}>
                     <AuthStack.Screen
                         name="Register"
                         component={RegistrationScreen}
                     />
                     <AuthStack.Screen name="Login" component={LoginScreen} />
-                </AuthStack.Navigator>
+                </AuthStack.Navigator> */}
             </NavigationContainer>
             <StatusBar style="auto" />
         </View>
