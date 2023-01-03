@@ -18,12 +18,36 @@ import ProfileScreen from "./Screens/mainScreens/ProfileScreen";
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
+const useRoute = (isAuth) => {
+    if (!isAuth) {
+        return (
+            <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+                <AuthStack.Screen
+                    name="Register"
+                    component={RegistrationScreen}
+                    options={{ test: "test" }}
+                />
+                <AuthStack.Screen name="Login" component={LoginScreen} />
+            </AuthStack.Navigator>
+        );
+    }
+    return (
+        <MainTab.Navigator>
+            <MainTab.Screen name="Posts" component={PostsScreen} />
+            <MainTab.Screen name="Create" component={CreatePostsScreen} />
+            <MainTab.Screen name="Profile" component={ProfileScreen} />
+        </MainTab.Navigator>
+    );
+};
+
 export default function App() {
     const [fontsLoaded] = useFonts({
         "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
         "Roboto-Italic": require("./assets/fonts/Roboto-Italic.ttf"),
         "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
     });
+
+    const routing = useRoute(false);
 
     useEffect(() => {
         async function prepare() {
@@ -44,23 +68,7 @@ export default function App() {
 
     return (
         <View style={styles.container} onLayout={onLayout}>
-            <NavigationContainer>
-                <MainTab.Navigator>
-                    <MainTab.Screen name="Posts" component={PostsScreen} />
-                    <MainTab.Screen
-                        name="Create"
-                        component={CreatePostsScreen}
-                    />
-                    <MainTab.Screen name="Profile" component={ProfileScreen} />
-                </MainTab.Navigator>
-                {/* <AuthStack.Navigator screenOptions={{ headerShown: false }}>
-                    <AuthStack.Screen
-                        name="Register"
-                        component={RegistrationScreen}
-                    />
-                    <AuthStack.Screen name="Login" component={LoginScreen} />
-                </AuthStack.Navigator> */}
-            </NavigationContainer>
+            <NavigationContainer>{routing}</NavigationContainer>
             <StatusBar style="auto" />
         </View>
     );

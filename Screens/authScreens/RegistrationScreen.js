@@ -21,7 +21,13 @@ const initialState = {
     password: "",
 };
 
-export default function RegistrationScreen({ navigation }) {
+export default function RegistrationScreen({
+    navigation,
+    options,
+    test,
+    route,
+}) {
+    console.log(options, test, route);
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [visibilityPassword, setVisibilityPassword] = useState(true);
