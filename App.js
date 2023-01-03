@@ -4,11 +4,13 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import RegistrationScreen from "./Screens/RegistrationScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import RegistrationScreen from "./Screens/authScreens/RegistrationScreen";
 import { useEffect, useCallback } from "react";
-import LoginScreen from "./Screens/LoginScreen";
+import LoginScreen from "./Screens/authScreens/LoginScreen";
 
-const Stack = createStackNavigator();
+const AuthStack = createStackNavigator();
+const MainTab = createBottomTabNavigator();
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -36,21 +38,16 @@ export default function App() {
 
     return (
         <View style={styles.container} onLayout={onLayout}>
-            {/* <ImageBackground
-                source={require("./assets/images/photo-background-1x.jpg")}
-                style={styles.image}
-            > */}
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <AuthStack.Navigator screenOptions={{ headerShown: false }}>
                     {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-                    <Stack.Screen
+                    <AuthStack.Screen
                         name="Register"
                         component={RegistrationScreen}
                     />
-                    <Stack.Screen name="Login" component={LoginScreen} />
-                </Stack.Navigator>
+                    <AuthStack.Screen name="Login" component={LoginScreen} />
+                </AuthStack.Navigator>
             </NavigationContainer>
-            {/* </ImageBackground> */}
             <StatusBar style="auto" />
         </View>
     );
@@ -59,9 +56,5 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // alignContent: "center",
-        // justifyContent: "center",
-        // alignItems: "center",
-        // textAlign: "center",
     },
 });

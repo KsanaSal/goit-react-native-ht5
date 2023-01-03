@@ -6,6 +6,7 @@ import {
     TextInput,
     TouchableOpacity,
     Pressable,
+    Image,
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
@@ -15,16 +16,18 @@ import {
 } from "react-native";
 
 const initialState = {
+    login: "",
     email: "",
     password: "",
 };
 
-export default function LoginScreen({ navigation }) {
+export default function RegistrationScreen({ navigation }) {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [visibilityPassword, setVisibilityPassword] = useState(true);
     const [focusedEmail, setFocusedEmail] = useState(false);
     const [focusedPassw, setFocusedPassw] = useState(false);
+    const [focusedLogin, setFocusedLogin] = useState(false);
 
     const keyboardHide = () => {
         setIsShowKeyboard(false);
@@ -33,6 +36,16 @@ export default function LoginScreen({ navigation }) {
         setState(initialState);
         setFocusedEmail(false);
         setFocusedPassw(false);
+        setFocusedLogin(false);
+    };
+
+    const onFocusLogin = () => {
+        setIsShowKeyboard(true);
+        setFocusedLogin(true);
+    };
+
+    const onBlurLogin = () => {
+        setFocusedLogin(false);
     };
 
     const onFocusEmail = () => {
@@ -56,22 +69,54 @@ export default function LoginScreen({ navigation }) {
     return (
         <TouchableWithoutFeedback onPress={keyboardHide}>
             <ImageBackground
-                source={require("../assets/images/photo-background-1x.jpg")}
+                source={require("../../assets/images/photo-background-1x.jpg")}
                 style={styles.image}
             >
                 <View
                     style={{
-                        ...styles.container,
-                        flex: isShowKeyboard ? 0.68 : 0.61,
+                        ...styles.containerRegister,
+                        flex: isShowKeyboard ? 0.8 : 0.62,
+                        // width: dimensions,
                     }}
                 >
                     <KeyboardAvoidingView
                         behavior={Platform.OS === "ios" ? "padding" : "height"}
                     >
+                        <View style={styles.wrap}>
+                            <View style={styles.wrapPhoto}></View>
+                            <View style={styles.wrapIcon}>
+                                <Image
+                                    source={require("../assets/icon/icon-plus.png")}
+                                ></Image>
+                            </View>
+                        </View>
+
                         <View>
-                            <Text style={styles.text}>Увійти</Text>
+                            <Text style={styles.text}>Регістрація</Text>
 
                             <View style={styles.form}>
+                                <View>
+                                    <TextInput
+                                        style={[
+                                            styles.input,
+                                            focusedLogin && {
+                                                borderColor: "#FF6C00",
+                                                backgroundColor: "#fff",
+                                            },
+                                        ]}
+                                        placeholder="Логін"
+                                        placeholderTextColor="#BDBDBD"
+                                        onFocus={() => onFocusLogin()}
+                                        onBlur={() => onBlurLogin()}
+                                        value={state.login}
+                                        onChangeText={(value) =>
+                                            setState((prevState) => ({
+                                                ...prevState,
+                                                login: value,
+                                            }))
+                                        }
+                                    />
+                                </View>
                                 <View style={{ marginTop: 16 }}>
                                     <TextInput
                                         style={[
@@ -137,9 +182,12 @@ export default function LoginScreen({ navigation }) {
                                     style={styles.btn}
                                     onPress={keyboardHide}
                                 >
-                                    <Text style={styles.btnTitle}>Увійти</Text>
+                                    <Text style={styles.btnTitle}>
+                                        Зареєструватися
+                                    </Text>
                                 </TouchableOpacity>
                             </View>
+
                             <View
                                 style={{
                                     display: "flex",
@@ -148,17 +196,13 @@ export default function LoginScreen({ navigation }) {
                                 }}
                             >
                                 <Text style={styles.linkText}>
-                                    Немає акаунта?
+                                    Вже є акаунт?
                                 </Text>
                                 <Pressable
                                     style={styles.linkBtn}
-                                    onPress={() =>
-                                        navigation.navigate("Register")
-                                    }
+                                    onPress={() => navigation.navigate("Login")}
                                 >
-                                    <Text style={styles.linkText}>
-                                        Зареєструватися
-                                    </Text>
+                                    <Text style={styles.linkText}>Увійти</Text>
                                 </Pressable>
                             </View>
                         </View>
@@ -170,7 +214,7 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    containerRegister: {
         bottom: 0,
         margin: 0,
         borderTopLeftRadius: 25,
@@ -191,6 +235,35 @@ const styles = StyleSheet.create({
         height: Dimensions.get("window").height,
         // resizeMode: "cover",
         justifyContent: "flex-end",
+    },
+
+    wrap: { marginBottom: 32 },
+
+    wrapPhoto: {
+        position: "absolute",
+        left: 128,
+        top: -60,
+        width: 120,
+        height: 120,
+        backgroundColor: "#F6F6F6",
+        borderRadius: 16,
+    },
+
+    wrapIcon: {
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+        bottom: -20,
+        left: 233,
+        color: "#FF6C00",
+        backgroundColor: "#fff",
+        borderWidth: 1,
+        borderColor: "#FF6C00",
+        borderRadius: 15,
+        width: 25,
+        height: 25,
     },
 
     text: {
@@ -261,6 +334,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#1B4371",
         alignItems: "center",
-        // textDecorationLine: "underline",
     },
 });
