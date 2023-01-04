@@ -33,6 +33,7 @@ export default function LoginScreen({ navigation }) {
         setState(initialState);
         setFocusedEmail(false);
         setFocusedPassw(false);
+        navigation.navigate("Home");
     };
 
     const onFocusEmail = () => {

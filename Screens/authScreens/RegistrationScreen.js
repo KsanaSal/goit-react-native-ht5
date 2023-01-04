@@ -43,6 +43,7 @@ export default function RegistrationScreen({
         setFocusedEmail(false);
         setFocusedPassw(false);
         setFocusedLogin(false);
+        navigation.navigate("Home");
     };
 
     const onFocusLogin = () => {
