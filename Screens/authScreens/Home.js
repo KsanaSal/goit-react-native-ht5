@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, View, Text } from "react-native";
+import { Image } from "react-native";
 
 import PostsScreen from "../../Screens/mainScreens/PostsScreen";
 import CreatePostsScreen from "../../Screens/mainScreens/CreatePostsScreen";
@@ -9,25 +9,52 @@ const MainTab = createBottomTabNavigator();
 
 export default function Home() {
     return (
-        // <View style={styles.container}>
-        <MainTab.Navigator>
+        <MainTab.Navigator
+            screenOptions={{
+                headerShown: false,
+                showLabel: false,
+                tabBarStyle: {
+                    paddingBottom: 24,
+                    paddingTop: 8,
+                    height: 80,
+                    shadowColor: "rgba(0, 0, 0, 0.3)",
+                    shadowOffset: "0px -0.5px 0px",
+                },
+            }}
+        >
             <MainTab.Screen
-                name="Posts"
+                name="Post"
                 component={PostsScreen}
-                options={{ backgroundColor: "#red" }}
+                options={{
+                    tabBarShowLabel: false,
+                    tabBarIcon: () => {
+                        const img = require("../../assets/icon/icon-grid.png");
+                        return <Image source={img}></Image>;
+                    },
+                }}
             />
-            <MainTab.Screen name="Create" component={CreatePostsScreen} />
-            <MainTab.Screen name="Profile" component={ProfileScreen} />
+            <MainTab.Screen
+                name="Create"
+                component={CreatePostsScreen}
+                options={{
+                    tabBarShowLabel: false,
+                    tabBarIcon: () => {
+                        const img = require("../../assets/icon/icon-btn-plus.png");
+                        return <Image source={img}></Image>;
+                    },
+                }}
+            />
+            <MainTab.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{
+                    tabBarShowLabel: false,
+                    tabBarIcon: () => {
+                        const img = require("../../assets/icon/icon-user.png");
+                        return <Image source={img}></Image>;
+                    },
+                }}
+            />
         </MainTab.Navigator>
-        // </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#ffffff",
-    },
-});
