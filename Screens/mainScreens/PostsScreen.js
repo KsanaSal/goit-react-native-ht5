@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 export default function PostsScreen() {
     return (
@@ -26,9 +26,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
-        height: 88,
-        width: Dimensions.get("window").width,
-        paddingTop: 55,
+        marginTop: 32,
     },
 
     wrapPhoto: {

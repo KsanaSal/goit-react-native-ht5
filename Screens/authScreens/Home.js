@@ -50,8 +50,10 @@ export default function Home({ navigation }) {
                     headerTitleAlign: "center",
                     headerRightContainerStyle: { paddingHorizontal: 16 },
                     tabBarShowLabel: false,
-                    tabBarIcon: () => {
-                        const img = require("../../assets/icon/icon-grid.png");
+                    tabBarIcon: ({ focused }) => {
+                        const img = focused
+                            ? require("../../assets/icon/icon-grid.png")
+                            : "";
                         return <Image source={img}></Image>;
                     },
                 }}
@@ -60,9 +62,30 @@ export default function Home({ navigation }) {
                 name="Create"
                 component={CreatePostsScreen}
                 options={{
+                    headerTitle: "Створити публікацію",
+                    headerTitleStyle: {
+                        color: "#212121",
+                        fontSize: 18,
+                        fontFamily: "Roboto-Medium",
+                        fontWeight: "medium",
+                    },
+                    headerLeft: () => {
+                        const img = require("../../assets/icon/icon-arrow-left.png");
+                        return (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate("Post")}
+                            >
+                                <Image source={img}></Image>
+                            </TouchableOpacity>
+                        );
+                    },
+                    headerTitleAlign: "center",
+                    headerLeftContainerStyle: { paddingHorizontal: 16 },
                     tabBarShowLabel: false,
-                    tabBarIcon: () => {
-                        const img = require("../../assets/icon/icon-btn-plus.png");
+                    tabBarIcon: ({ focused }) => {
+                        const img = focused
+                            ? require("../../assets/icon/icon-grid.png")
+                            : require("../../assets/icon/icon-btn-plus.png");
                         return <Image source={img}></Image>;
                     },
                 }}
@@ -73,8 +96,10 @@ export default function Home({ navigation }) {
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,
-                    tabBarIcon: () => {
-                        const img = require("../../assets/icon/icon-user.png");
+                    tabBarIcon: ({ focused }) => {
+                        const img = focused
+                            ? ""
+                            : require("../../assets/icon/icon-user.png");
                         return <Image source={img}></Image>;
                     },
                 }}
