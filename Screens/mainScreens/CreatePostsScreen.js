@@ -25,58 +25,30 @@ export default function CreatePostsScreen() {
             </View>
             <View style={styles.form}>
                 <View>
-                    <TextInput style={styles.input} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Назва ..."
+                        placeholderTextColor="#BDBDBD"
+                    />
                 </View>
-                <View style={{ marginTop: 16 }}>
-                    <TextInput style={styles.input} />
+                <View style={styles.inputWrap}>
+                    <Image
+                        source={require("../../assets/icon/icon-map-pin.png")}
+                    ></Image>
+                    <TextInput
+                        style={{
+                            ...styles.input,
+                            borderBottomWidth: 0,
+                        }}
+                        placeholder="Місцевість ..."
+                        placeholderTextColor="#BDBDBD"
+                    />
                 </View>
+                <TouchableOpacity style={styles.btn}>
+                    <Text style={styles.text}>Публікувати</Text>
+                </TouchableOpacity>
             </View>
             {/* <View style={styles.form}>
-                <View style={{ marginTop: 16 }}>
-                    <TextInput
-                        // style={[
-                        //     styles.input,
-                        //     focusedEmail && {
-                        //         borderColor: "#FF6C00",
-                        //         backgroundColor: "#fff",
-                        //     },
-                        // ]}
-                        placeholder="Адреса електронної почти"
-                        placeholderTextColor="#BDBDBD"
-                        // onFocus={() => onFocusEmail()}
-                        // onBlur={() => onBlurEmail()}
-                        // value={state.email}
-                        // onChangeText={(value) =>
-                        //     setState((prevState) => ({
-                        //         ...prevState,
-                        //         email: value,
-                        //     }))
-                        // }
-                    />
-                </View>
-                <View style={styles.inputPassword}>
-                    <TextInput
-                        // style={[
-                        //     styles.input,
-                        //     focusedPassw && {
-                        //         borderColor: "#FF6C00",
-                        //         backgroundColor: "#fff",
-                        //     },
-                        // ]}
-                        secureTextEntry={visibilityPassword}
-                        placeholder="Пароль"
-                        placeholderTextColor="#BDBDBD"
-                        // onFocus={() => onFocusPassw()}
-                        // onBlur={() => onBlurPassw()}
-                        // value={state.password}
-                        // onChangeText={(value) =>
-                        //     setState((prevState) => ({
-                        //         ...prevState,
-                        //         password: value,
-                        //     }))
-                        // }
-                    />
-                </View>
                 <TouchableOpacity
                     activeOpacity={0.8}
                     style={styles.btn}
@@ -154,15 +126,33 @@ const styles = StyleSheet.create({
 
     input: {
         padding: 16,
-        borderWidth: 1,
+        borderBottomWidth: 1,
         borderColor: "#E8E8E8",
         height: 50,
-        borderRadius: 8,
-        backgroundColor: "#F6F6F6",
+        backgroundColor: "#fff",
 
         textAlign: "left",
         fontFamily: "Roboto-Regular",
         fontSize: 16,
         color: "#212121",
+    },
+
+    inputWrap: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 16,
+        borderBottomWidth: 1,
+        borderColor: "#E8E8E8",
+        // borderLeftWidth: "",
+    },
+
+    btn: {
+        backgroundColor: "#F6F6F6",
+        height: 50,
+        borderRadius: 100,
+        marginTop: 40,
+        justifyContent: "center",
+        alignItems: "center",
     },
 });
