@@ -11,8 +11,6 @@ export default function Home({ navigation }) {
     return (
         <MainTab.Navigator
             screenOptions={{
-                // headerShown: false,
-                // showLabel: false,
                 tabBarStyle: {
                     paddingBottom: 24,
                     paddingTop: 8,
@@ -50,10 +48,8 @@ export default function Home({ navigation }) {
                     headerTitleAlign: "center",
                     headerRightContainerStyle: { paddingHorizontal: 16 },
                     tabBarShowLabel: false,
-                    tabBarIcon: ({ focused }) => {
-                        const img = focused
-                            ? require("../../assets/icon/icon-grid.png")
-                            : "";
+                    tabBarIcon: () => {
+                        const img = require("../../assets/icon/icon-grid.png");
                         return <Image source={img}></Image>;
                     },
                 }}
@@ -82,10 +78,8 @@ export default function Home({ navigation }) {
                     headerTitleAlign: "center",
                     headerLeftContainerStyle: { paddingHorizontal: 16 },
                     tabBarShowLabel: false,
-                    tabBarIcon: ({ focused }) => {
-                        const img = focused
-                            ? require("../../assets/icon/icon-grid.png")
-                            : require("../../assets/icon/icon-btn-plus.png");
+                    tabBarIcon: () => {
+                        const img = require("../../assets/icon/icon-btn-plus.png");
                         return <Image source={img}></Image>;
                     },
                 }}
@@ -96,10 +90,8 @@ export default function Home({ navigation }) {
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,
-                    tabBarIcon: ({ focused }) => {
-                        const img = focused
-                            ? ""
-                            : require("../../assets/icon/icon-user.png");
+                    tabBarIcon: () => {
+                        const img = require("../../assets/icon/icon-user.png");
                         return <Image source={img}></Image>;
                     },
                 }}

@@ -48,15 +48,6 @@ export default function CreatePostsScreen() {
                     <Text style={styles.text}>Публікувати</Text>
                 </TouchableOpacity>
             </View>
-            {/* <View style={styles.form}>
-                <TouchableOpacity
-                    activeOpacity={0.8}
-                    style={styles.btn}
-                    // onPress={keyboardHide}
-                >
-                    <Text style={styles.btnTitle}>Увійти</Text>
-                </TouchableOpacity>
-            </View> */}
         </View>
     );
 }
@@ -144,7 +135,6 @@ const styles = StyleSheet.create({
         marginTop: 16,
         borderBottomWidth: 1,
         borderColor: "#E8E8E8",
-        // borderLeftWidth: "",
     },
 
     btn: {
