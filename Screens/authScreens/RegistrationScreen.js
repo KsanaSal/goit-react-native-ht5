@@ -83,7 +83,6 @@ export default function RegistrationScreen({
                     style={{
                         ...styles.containerRegister,
                         flex: isShowKeyboard ? 0.8 : 0.62,
-                        // width: dimensions,
                     }}
                 >
                     <KeyboardAvoidingView
@@ -240,7 +239,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
-        // resizeMode: "cover",
         justifyContent: "flex-end",
     },
 
