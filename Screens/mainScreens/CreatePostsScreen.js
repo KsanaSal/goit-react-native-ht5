@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import { Camera } from "expo-camera";
 import {
     StyleSheet,
     View,
@@ -8,19 +10,39 @@ import {
 } from "react-native";
 
 export default function CreatePostsScreen() {
+    const [camera, setCamera] = useState(null);
+    const [photo, setPhoto] = useState("");
+
+    const takePhoto = async () => {
+        // console.log("first");
+        const photo = await camera.takePictureAsync();
+        setPhoto(photo.uri);
+        console.log(photo);
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <View>
-                    <View style={styles.wrapPhoto}>
-                        <View style={styles.wrapIcon}>
+                <View style={styles.wrap}>
+                    <Camera style={styles.camera} ref={setCamera}>
+                        {photo && (
+                            <View style={styles.wrapPhoto}>
+                                <Image source={{ uri: photo }} />
+                            </View>
+                        )}
+                        <TouchableOpacity
+                            style={styles.wrapIcon}
+                            onPress={takePhoto}
+                        >
                             <Image
                                 source={require("../../assets/icon/icon-camera.png")}
                                 style={styles.icon}
                             ></Image>
-                        </View>
-                    </View>
-                    <Text style={styles.text}>Загрузити фото</Text>
+                        </TouchableOpacity>
+                    </Camera>
+                    <TouchableOpacity>
+                        <Text style={styles.text}>Загрузити фото</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.form}>
@@ -66,23 +88,50 @@ const styles = StyleSheet.create({
         marginTop: 32,
     },
 
-    wrapPhoto: {
+    wrap: {
+        // marginRight: 8,
+        // width: 343,
+        // height: 240,
+        // backgroundColor: "#F6F6F6",
+        // borderRadius: 8,
+        // borderColor: "#E8E8E8",
+        // borderWidth: 1,
+        textAlign: "right",
+        // alignItems: "center",
+        // justifyContent: "center",
+    },
+
+    camera: {
         marginRight: 8,
-        width: 343,
+        width: 400,
         height: 240,
-        backgroundColor: "#F6F6F6",
+        // backgroundColor: "#F6F6F6",
+        // borderRadius: 8,
+        // borderColor: "#E8E8E8",
+        // borderWidth: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    wrapPhoto: {
+        position: "absolute",
+        marginRight: 8,
+        width: 200,
+        height: 200,
+        // backgroundColor: "#F6F6F6",
         borderRadius: 8,
         borderColor: "#E8E8E8",
         borderWidth: 1,
-        alignItems: "center",
-        justifyContent: "center",
+        textAlign: "right",
+        // alignItems: "center",
+        // justifyContent: "center",
     },
 
     wrapIcon: {
         width: 60,
         height: 60,
         borderRadius: 30,
-        backgroundColor: "#fff",
+        backgroundColor: "rgba(255, 255, 255, 0.3)",
         alignItems: "center",
         justifyContent: "center",
     },
@@ -98,18 +147,18 @@ const styles = StyleSheet.create({
         fontWeight: "regular",
         fontSize: 16,
         lineHeight: 15,
-        textAlign: "left",
+        // textAlign: "left",
         color: "#BDBDBD",
     },
 
-    textEmail: {
-        fontFamily: "Roboto-Regular",
-        fontWeight: "400",
-        fontSize: 12,
-        lineHeight: 13,
-        textAlign: "center",
-        color: "rgba(33, 33, 33, 0.8)",
-    },
+    // textEmail: {
+    //     fontFamily: "Roboto-Regular",
+    //     fontWeight: "400",
+    //     fontSize: 12,
+    //     lineHeight: 13,
+    //     textAlign: "center",
+    //     color: "rgba(33, 33, 33, 0.8)",
+    // },
 
     form: {
         marginTop: 32,
