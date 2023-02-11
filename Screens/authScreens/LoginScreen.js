@@ -33,6 +33,10 @@ export default function LoginScreen({ navigation }) {
         setState(initialState);
         setFocusedEmail(false);
         setFocusedPassw(false);
+    };
+
+    const buttonLogin = () => {
+        keyboardHide();
         navigation.navigate("Home");
     };
 
@@ -136,7 +140,7 @@ export default function LoginScreen({ navigation }) {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.btn}
-                                    onPress={keyboardHide}
+                                    onPress={buttonLogin}
                                 >
                                     <Text style={styles.btnTitle}>Увійти</Text>
                                 </TouchableOpacity>
