@@ -11,10 +11,12 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
 } from "react-native";
+import * as Location from "expo-location";
 
 const initialState = {
     name: "",
     location: "",
+    isPublishActive: false,
 };
 
 export default function CreatePostsScreen({ navigation }) {
@@ -23,13 +25,28 @@ export default function CreatePostsScreen({ navigation }) {
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
     const [focusedName, setFocusedName] = useState("");
-    const [location, setLocation] = useState("");
+    const [location, setLocation] = useState(null);
     const [isPublishActive, setIsPublishActive] = useState(false);
 
     const takePhoto = async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+            console.log("Permission to access location was denied");
+            return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        // const location = await Location.getCurrentPositionAsync({});
+        setLocation({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+        });
         const photo = await camera.takePictureAsync();
-        setPhoto(photo.uri);
-        console.log(photo);
+        if (photo.uri) {
+            setPhoto(photo.uri);
+        }
+
+        console.log(location);
     };
 
     const keyboardHide = () => {
@@ -54,6 +71,20 @@ export default function CreatePostsScreen({ navigation }) {
     const onFocusLocation = () => {
         setIsShowKeyboard(true);
         // setFocusedName(true);
+    };
+
+    const sendPhoto = () => {
+        setIsShowKeyboard(false);
+        Keyboard.dismiss();
+        if (photo && location && state) {
+            console.log("second");
+            setIsShowKeyboard(false);
+            setPhoto(null);
+            setLocation(null);
+            setState(initialState);
+            navigation.navigate("Post", { photo, location, state });
+        }
+        console.log("first", location);
     };
 
     return (
@@ -85,7 +116,6 @@ export default function CreatePostsScreen({ navigation }) {
                     <TouchableOpacity>
                         <Text style={styles.text}>Загрузити фото</Text>
                     </TouchableOpacity>
-                    {/* </View> */}
                 </View>
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -108,6 +138,8 @@ export default function CreatePostsScreen({ navigation }) {
                                     setState((prevState) => ({
                                         ...prevState,
                                         name: value,
+                                        isPublishActive:
+                                            value && state.location,
                                     }))
                                 }
                             />
@@ -130,12 +162,31 @@ export default function CreatePostsScreen({ navigation }) {
                                     setState((prevState) => ({
                                         ...prevState,
                                         location: value,
+                                        isPublishActive: value && state.name,
                                     }))
                                 }
                             />
                         </View>
-                        <TouchableOpacity style={styles.btn}>
-                            <Text style={styles.text}>Публікувати</Text>
+                        <TouchableOpacity
+                            style={{
+                                ...styles.btn,
+                                backgroundColor: state.isPublishActive
+                                    ? "#FF6C00"
+                                    : "#F6F6F6",
+                            }}
+                            onPress={sendPhoto}
+                            disabled={!state.isPublishActive}
+                        >
+                            <Text
+                                style={{
+                                    ...styles.text,
+                                    color: state.isPublishActive
+                                        ? "#fff"
+                                        : "#BDBDBD",
+                                }}
+                            >
+                                Публікувати
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
@@ -187,9 +238,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderColor: "#E8E8E8",
         borderWidth: 1,
-        textAlign: "right",
-        // alignItems: "center",
-        // justifyContent: "center",
     },
 
     wrapIcon: {
