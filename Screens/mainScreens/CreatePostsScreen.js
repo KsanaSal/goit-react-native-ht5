@@ -24,9 +24,9 @@ export default function CreatePostsScreen({ navigation }) {
     const [photo, setPhoto] = useState("");
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
     const [state, setState] = useState(initialState);
-    const [focusedName, setFocusedName] = useState("");
+    // const [focusedName, setFocusedName] = useState("");
     const [location, setLocation] = useState(null);
-    const [isPublishActive, setIsPublishActive] = useState(false);
+    // const [isPublishActive, setIsPublishActive] = useState(false);
 
     const takePhoto = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -82,7 +82,7 @@ export default function CreatePostsScreen({ navigation }) {
             setPhoto(null);
             setLocation(null);
             setState(initialState);
-            navigation.navigate("Post", { photo, location, state });
+            navigation.navigate("DefaultScreen", { photo, location, state });
         }
         console.log("first", location);
     };
@@ -261,7 +261,6 @@ const styles = StyleSheet.create({
         fontWeight: "regular",
         fontSize: 16,
         lineHeight: 15,
-        // textAlign: "left",
         color: "#BDBDBD",
     },
 
